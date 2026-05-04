@@ -203,31 +203,67 @@ def contact_manager():
     address_book = AddressBook()
     print(f"Hello {user.name}, What would you like to do?")
     while True:
-        # Need to add the rest of the menu options and the functions for each of them. (will add later)
+        # Need to add the rest of the menu options and the functions for each of them.
+        #added (this is done)
         
         choice = input("Choose an option from the menu above (1-6): ")
         if choice == "1":
-            # call the add contact function
-            pass
+            name = input("Enter Contact Name: ")
+            phone_number = input("Enter Phone Number: ")
+            email = input("Enter Contact Email: ")
+
+            contact = Contact(name, phone_number, email)
+            address_book.add_contact(contact)
+            print("Contact has been added")
+            
         elif choice == "2":
-            # call the display contact function
-            pass
+            if not address_book.contacts:
+                print("No contacts to display")
+            else:
+                print("\nContacts:")
+                for contact in address_book.contacts:
+                    print(contact.get_info())
         elif choice == "3":
-            # call the edit contact function
-            pass
+            name = input("Enter the name of contact you wish to edit")
+            new_name = input("Enter new name, or press enter key to keep current name: ")
+            new_phone_number = input("Enter new phone number, or press the enter key to keep current phone number: ")
+            new_email = input("Enter new email, or press enter key to keep current email: ")
+
+            if new_name == "":
+                new_name = None
+            if new_phone_number == "":
+                new_phone_number = None
+            if new_email == "":
+                new_email = None
+
+            address_book.edit_contact(
+                name,
+                new_name,
+                new_phone_number,
+                new_email
+            )
+            print("Contact updated successfully.")
+
+        
         elif choice == "4":
-            # call the remove contact function
-            pass
+            name = input("Enter the name of the contact you want to remove: ")
+
+            address_book.remove_contact(name)
+            print("Contact removed successfully.")
         elif choice == "5":
-            # call the export contacts function
-            pass
-        elif choice == "6": 
-            # quit the program
-            pass
+            filename = input("Enter the file name that you want to export contacts to: ")
+
+            address_book.export_contacts(filename)
+            print(f"Contacts exported to {filename}!")
+        elif choice == "6":
+            print("You have wished to exit the program. Goodbye !")
+            
         else:
-            print("Invalid choice!!! Please choose a valid option from the choice menu.") 
+            print("Invalid choice... lets choose a valid option from the choice menu.") 
+            break
 
 
 
 if __name__ == "__main__":
     contact_manager()
+    
