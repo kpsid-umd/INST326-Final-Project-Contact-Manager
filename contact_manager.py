@@ -5,13 +5,14 @@
 # Group Members: Siddharth Padithaya, Rayan Shah, and Raymond Dickscheid
 import json
 class User:
-    """ This class stores information related to the user such as adding user info, editing user info and displaying user info. 
+    """ This class stores information related to the user with methods such as adding user info, editing user info and displaying user info. 
     Attributes:
         name (str): The name of the user
     """
     def __init__(self, name):
-        """
-        This method initializes the user with a name
+        """ Initializes a User instance with a name
+        Args:
+            name(str): The name of the current user. 
         """
         self.name = name
         
@@ -20,9 +21,7 @@ class User:
         Args:
             None
         Returns: 
-            The user's name
-        Side Effects:
-            None
+            str: The user's name as an fstring
         """
         return f"Name: {self.name}"
         
@@ -85,8 +84,6 @@ class Contact:
             None
         Returns:
             str: A string with the contact's name, phone number, and email address
-        Side Effects:
-            None
         """
         return f"Name: {self.name}, Phone Number: {self.phone_number}, Email: {self.email}"
         
@@ -112,6 +109,8 @@ class AddressBook:
             None
         Side Effects:
             Adds the contact to the AddressBook. If a contact with the same name already exists, a ValueError will be raised.
+        Raises:
+            ValueError if a contact already exists with the same name.
 
         """
         for existing_contact in self.contacts:
@@ -126,10 +125,10 @@ class AddressBook:
         Args:
             name (str): The name of the contact that needs its information found
         Returns:
-            Contact: The matching contact name if found in the user's contacts. 
+            Contact: The matching contact if found. 
         Side Effects:
             If a contact with the name that was searched for is not found, a ValueError will be raised.
-        Raises
+        Raises:
             ValueError: If the contact name could not be found in the user's contacts.
         """
         for contact in self.contacts:
@@ -187,10 +186,10 @@ class AddressBook:
         Args:
             filename (str): The name of the file the contacts will be exported to. 
         Returns:
-            str: The name of the file the contacts were exported to and created locally in the folder of the program. 
+            str: The name of the file the contacts were exported to. 
         Side Effects:
             Creates a file with the name of the filename parameter from the user, and writes the contact information of all the contacts inside the AddressBook to the file.
-            Each contact's information will be writted on a new line in the file.
+            Each contact's information will be written on a new line in the file.
             If there aren't any contacts inside the AddressBook, a ValueError will be raised.
         """
         if not self.contacts:
@@ -203,13 +202,13 @@ class AddressBook:
     
 
     def local_save(self, filename= "My_Local_Contacts.json"):
-        """Saves all contacts the user created to a local .json file. This allows the user to exit the program and run it again with all their contacts saved.
+        """Saves all contacts the user created to a local JSON file. This allows the user to exit the program and run it again with all their contacts saved.
         Args:
             filename (str): The file name that the contacts are saved to.
         Returns:
             None
         Side Effects:
-            Writes the json file with the current list of contacts. 
+            Writes the JSON file with the current list of contacts. 
         """
         data = []
         for contact in self.contacts:
@@ -220,13 +219,13 @@ class AddressBook:
     
 
     def load_local_contacts(self,filename="My_Local_Contacts.json"):
-        """Opens and reads the local .json file into the AddressBook.
+        """Loads the contacts from the local JSON file into the addressbook. 
         Args:
             filename (str): The file that the contacts are saved to.
         Returns:
             None
         Side Effects:
-            Reads the json file with current list of contacts and appends it to the contacts. If file is not found, just returns an empty list.
+            Reads the JSON file with current list of contacts and appends it to the contacts. If file is not found, just returns an empty list.
         """
         try:
             with open(filename, "r") as file:
@@ -255,7 +254,7 @@ def contact_manager():
     address_book = AddressBook()
     address_book.load_local_contacts()
     print( f"\nHello {user.name}, What would you like to do?")
-    
+
     while True:
         print("\n--- Menu ---")
         print("1. Add Contact")
