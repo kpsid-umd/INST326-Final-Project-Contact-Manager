@@ -286,7 +286,7 @@ def contact_manager():
                     print(contact.get_info())
         elif choice == "3":
             try:
-                name = input("Enter the name of contact you wish to edit")
+                name = input("Enter the name of contact you wish to edit: ")
                 new_name = input("Enter new name, or press enter key to keep current name: ")
                 new_phone_number = input("Enter new phone number, or press the enter key to keep current phone number: ")
                 new_email = input("Enter new email, or press enter key to keep current email: ")
