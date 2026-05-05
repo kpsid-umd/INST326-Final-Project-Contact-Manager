@@ -115,7 +115,7 @@ class AddressBook:
         """
         for existing_contact in self.contacts:
             if existing_contact.name == contact.name:
-                raise ValueError(" A contact with this name already exists. If this is a different contact, please add the last name initial to differentiate between them.")
+                raise ValueError("\nA contact with this name already exists. If this is a different contact, please add the last name initial to differentiate between them.")
         self.contacts.append(contact)
         self.local_save()
     
@@ -134,7 +134,7 @@ class AddressBook:
         for contact in self.contacts:
             if contact.name == name:
                 return contact
-        raise ValueError("Contact with that name could not be found.")
+        raise ValueError("\nContact with that name could not be found.")
     
 
 
@@ -158,7 +158,7 @@ class AddressBook:
         if new_name:
             for names in self.contacts:
                 if names.name == new_name and names != contact:
-                    raise ValueError(" A contact with this name already exists.")
+                    raise ValueError("\nA contact with this name already exists.")
                 
         contact.update_info(new_name, new_phone_number, new_email)
         self.local_save()
@@ -193,7 +193,7 @@ class AddressBook:
             If there aren't any contacts inside the AddressBook, a ValueError will be raised.
         """
         if not self.contacts:
-            raise ValueError("There are no contacts in the AddressBook to export")
+            raise ValueError("\nThere are no contacts in the AddressBook to export")
         
         with open(filename, 'w', encoding = "utf-8") as file:
             for contact in self.contacts:
@@ -273,13 +273,13 @@ def contact_manager():
 
                 contact = Contact(name, phone_number, email)
                 address_book.add_contact(contact)
-                print("Contact has been added")
+                print("\nContact has been added")
             except ValueError as error:
                 print(error)
 
         elif choice == "2":
             if not address_book.contacts:
-                print("No contacts to display")
+                print("\nNo contacts to display")
             else:
                 print("\nContacts:")
                 for contact in address_book.contacts:
@@ -299,7 +299,7 @@ def contact_manager():
                     new_email = None
             
                 address_book.edit_contact(name, new_name, new_phone_number, new_email)
-                print("Contact updated successfully.")
+                print("\nContact updated successfully.")
             except ValueError as error:
                 print (error)
         
@@ -308,7 +308,7 @@ def contact_manager():
                 name = input("Enter the name of the contact you want to remove: ")
 
                 address_book.remove_contact(name)
-                print("Contact removed successfully.")
+                print("\nContact removed successfully.")
             except ValueError as error:
                 print(error)
 
@@ -317,15 +317,15 @@ def contact_manager():
                 filename = input("Enter the file name that you want to export contacts to: ")
 
                 address_book.export_contacts(filename)
-                print(f"Contacts exported to {filename}!")
+                print(f"\nContacts exported to {filename}!")
             except ValueError as error:
                 print (error)
 
         elif choice == "6":
-            print("You have wished to exit the program. Goodbye !")
+            print("\nYou have wished to exit the program. Goodbye !")
             break
         else:
-            print("Invalid choice... please choose a valid option from the menu.") 
+            print("\nInvalid choice... please choose a valid option from the menu.") 
 
 
 
